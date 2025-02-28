@@ -6,7 +6,7 @@ let obj={
     name:"raj",
     age:34
 }
-const PORT=35711;
+const PORT = process.env.PORT || 35711;
 // now we will use createServer() to createServer.
 // createServer takes a callback as an argument , which takes two parameters .
 // where :-
