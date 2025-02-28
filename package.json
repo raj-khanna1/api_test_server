@@ -1,0 +1,9 @@
+{
+    "name": "api tester application",
+    "version": "1.0.0",
+    "description": "learning packages and all,and maa ka per muchak gaya aaj... ups!!",
+    "main": "index.js",
+    "author": "raj khanna",
+    "type":"commonjs"
+  }
+  
