@@ -16,23 +16,23 @@ const server=http.createServer(function(req,res){
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
         const mthd=req.method;
-        console.log(mthd);
+        // console.log(mthd);
         const url=req.url;
         if(mthd=='GET'){
             let ts=url.substring(0,10);
-            console.log("char at 11= ",url[11]);
-            console.log("url= ",url);
+            // console.log("char at 11= ",url[11]);
+            // console.log("url= ",url);
             if(url=='/api/users'){
                 let ar=new Array;
                 usersMap.forEach((val,key)=>{
                     let s="id: "+key;
                     ar.push({id:key,userInfo:val});
                 });
-                console.log(ar);
+                // console.log(ar);
                 res.end(JSON.stringify(ar));
             }
             else if(url=='/api/websiteData'){
-                console.log("camed");
+                // console.log("camed");
                 res.end(JSON.stringify(methods.methods1));
             }
             else if(url.length>11&&url[11]>='1'&&url[11]<='9'){
@@ -47,29 +47,29 @@ const server=http.createServer(function(req,res){
             else {res.writeHead(200, { "Content-Type": "text/plain" });res.end("Don't Know what are u trying to do,Go and watch TWD!");}
         }
         else if(mthd=='POST'){
-            console.log("url = ",url);
+            // console.log("url = ",url);
             if(url=='/api/users'){
                 let data='';
                 req.on('data',function(chunk){
                     data+=chunk.toString();
                 });
                 req.on('end',function(){
-                    console.log("data= ",data);
+                    // console.log("data= ",data);
                     try{
                         let parsedBody = JSON.parse(data);
-                        console.log("parse body= ",parsedBody);
+                        // console.log("parse body= ",parsedBody);
                         usersMap.set(parsedBody.id,parsedBody.userInfo);
                         res.writeHead(200, { "Content-Type": "text/plain" });
                         res.end("USER ADDED CHK BY GETTING BY ID");
                     }catch(error){
-                        console.log("error= ",error);
+                        // console.log("error= ",error);
                         res.end("bad post data, required json");
                     }
                     
                 });
             }
             else if(url=='/api/register'){
-                console.log("in register");
+                // console.log("in register");
                 let data='';
                 req.on('data',function(chunk){
                     data+=chunk.toString();
@@ -86,23 +86,23 @@ const server=http.createServer(function(req,res){
                         else throw("bekar");
                         
                     }catch(error){
-                        console.log("error= ",error);
+                        // console.log("error= ",error);
                         res.end("NOT CORRECT INFO");
                     }
                     
                 });
             }
             else if(url=='/api/login'){
-                console.log("in login");
+                // console.log("in login");
                 let data='';
                 req.on('data',function(chunk){
                     data+=chunk.toString();
                 });
                 req.on('end',function(){
-                    console.log("data= ",data);
+                    // console.log("data= ",data);
                     try{
                         let parsedBody = JSON.parse(data);
-                        console.log("parse body= ",parsedBody);
+                        // console.log("parse body= ",parsedBody);
                         if(validLoginDetails(parsedBody)){
                             // if the given login/sign up details are succesful
                             res.end("LOGED IN");
@@ -110,7 +110,7 @@ const server=http.createServer(function(req,res){
                         else throw("NOT VALID LOGIN DETAILS");
                         
                     }catch(error){
-                        console.log("error= ",error);
+                        // console.log("error= ",error);
                         res.end("NOT VALID LOGIN DETAILS");
                     }
                     
@@ -127,7 +127,7 @@ const server=http.createServer(function(req,res){
                 req.on('end',function(){
                     try{
                         let parsedBody = JSON.parse(data);
-                        console.log("parse body= ",parsedBody);
+                        // console.log("parse body= ",parsedBody);
                         if(usersMap.has(parsedBody.id)){
                             usersMap.set(parsedBody.id,parsedBody.userInfo);
                             res.writeHead(200, { "Content-Type": "text/plain" });
@@ -205,7 +205,7 @@ function valid(obj){
     return 1;
 }
 function validLoginDetails(obj){
-    console.log("obid= ",obj.uesrId);
+    // console.log("obid= ",obj.uesrId);
     if(obj.uesrId==undefined||obj.password==undefined||loginMap.has(obj.uesrId)==false)return 0;
     return 1;
 }
